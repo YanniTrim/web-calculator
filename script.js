@@ -16,3 +16,8 @@ function operate(val1, val2, operator) {
             return divide(val1, val2);
     }
 }
+
+console.log(operate(2,5,"+"));
+console.log(operate(2,5,"-"));
+console.log(operate(2,5,"*"));
+console.log(operate(2,5,"/"));

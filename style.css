@@ -1,0 +1,49 @@
+.calculator {
+    border: 2px black solid;
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    background-color: darkslateblue;
+    justify-content: space-between;
+}
+
+.screen {
+    background-color:azure;
+    text-align: end;
+    font-size: 20px;
+    flex: 1
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+}
+.left-side {
+    display: flex;
+    flex-direction: column;
+    flex: 3;
+}
+.numpad {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.top-row, .row1, .row2, .row3, .row4 {
+    display: flex;
+    justify-content: space-around;
+    flex: 21;
+}
+
+.operators {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+button {
+    width: 80px;
+    height: 80px;
+}
