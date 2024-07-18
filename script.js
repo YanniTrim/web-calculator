@@ -1,7 +1,8 @@
 const displayText = document.querySelector("p");
-let currentOp;
+let currentOp ='';
 let val1;
 let val2;
+let toReplace;
 
 function add(n1, n2) {return n1+n2;}
 function sub(n1, n2) {return n1-n2;}
@@ -27,12 +28,13 @@ function operate(val1, val2, operator) {
 }
 
 function operatorCall(symbol) {
-    // if (currentOp != undefined || currentOp != '') {
-    //     displayText.textContent = operate(val1, parseInt(displayText.textContent), currentOp);
-    // }
-    val1 = parseInt(displayText.textContent);
+    if (currentOp != '') {
+        console.log(currentOp);
+        displayText.textContent = operate(val1, parseFloat(displayText.textContent), currentOp);
+    }
+    val1 = parseFloat(displayText.textContent);
     currentOp = symbol;
-    displayText.textContent = ""; //get ready for new value 
+    toReplace = true; //get ready for new value 
 }
 
 function equalsCall() {
@@ -40,8 +42,9 @@ function equalsCall() {
         return;
     }
     else {
-        val2 = parseInt(displayText.textContent);
+        val2 = parseFloat(displayText.textContent);
         displayText.textContent = operate(val1, val2, currentOp);
+        toReplace = true;
     }
 }
 
@@ -49,6 +52,10 @@ function equalsCall() {
 
 
 function printNum(num) {
+    if (toReplace) {
+        displayText.textContent ='';
+        toReplace = false;
+    }
     displayText.textContent+=num;
 }
 
