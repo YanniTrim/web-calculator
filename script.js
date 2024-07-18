@@ -9,7 +9,6 @@ function sub(n1, n2) {return n1-n2;}
 function mul(n1, n2) {return n1*n2;}
 function divide(n1, n2) {return n1/n2;}
 
-
 function operate(val1, val2, operator) {
     switch (operator) {
         case "+":
@@ -27,7 +26,7 @@ function operate(val1, val2, operator) {
     }
 }
 
-function operatorCall(symbol) {
+function operatorCall(symbol) { // TODO make it only work if there is previous value
     if (currentOp != '') {
         console.log(currentOp);
         displayText.textContent = operate(val1, parseFloat(displayText.textContent), currentOp);
@@ -48,15 +47,23 @@ function equalsCall() {
     }
 }
 
-
-
-
 function printNum(num) {
     if (toReplace) {
         displayText.textContent ='';
         toReplace = false;
     }
     displayText.textContent+=num;
+}
+
+function clearEntry () {
+    displayText.textContent = '';
+}
+
+function clearAll () {
+    displayText.textContent = ''
+    val1 = null;
+    val2 = null;
+    currentOp = '';
 }
 
 // GIVE NUMPAD FUNCTIONALITY
@@ -82,4 +89,19 @@ for (let i=0; i < opButtons.length-1; i++) {
 let eqButton = opButtons.item(opButtons.length-1);
 eqButton.addEventListener("click", function() {
     equalsCall();
+});
+
+//GIVE TOP ROW FUNCTIONALITY
+const topRowDiv = document.querySelector(".top-row");
+const topRowButtons = topRowDiv.querySelectorAll('button');
+topRowButtons.item(0).addEventListener("click", function() {
+    clearEntry();
+});
+topRowButtons.item(1).addEventListener("click", function() {
+    clearAll();
+});
+topRowButtons.item(2).addEventListener("click", function() {
+    if (displayText.textContent.length != 0) {
+        displayText.textContent = displayText.textContent.slice(0, displayText.textContent.length-1);
+    }
 });
