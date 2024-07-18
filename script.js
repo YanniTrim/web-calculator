@@ -17,7 +17,19 @@ function operate(val1, val2, operator) {
     }
 }
 
-console.log(operate(2,5,"+"));
-console.log(operate(2,5,"-"));
-console.log(operate(2,5,"*"));
-console.log(operate(2,5,"/"));
+const displayText = document.querySelector("p");
+let inDisplay;
+
+
+function printNum(num) {
+    displayText.textContent+=num;
+    inDisplay = displayText.textContent;
+}
+
+const numberButtons = document.getElementsByClassName("numberButton")
+for (let i=0; i<numberButtons.length; i++) {
+    let button = numberButtons.item(i);
+    button.addEventListener("click", function() {
+        printNum(button.textContent);
+    });
+}
