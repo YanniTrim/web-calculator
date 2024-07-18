@@ -36,7 +36,7 @@
     flex: 21;
 }
 
-.operators {
+div.operators {
     display: flex;
     flex-direction: column;
     align-items: center;
