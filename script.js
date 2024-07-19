@@ -49,7 +49,7 @@ function equalsCall() {
 }
 
 function printNum(num) {
-    if (toReplace) {
+    if (toReplace || displayText.textContent==0) {
         displayText.textContent ='';
         toReplace = false;
     }
