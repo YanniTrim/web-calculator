@@ -4,6 +4,7 @@ let currentOp ='';
 let val1;
 let val2;
 let toReplace;
+let isDecimal = false;
 
 function add(n1, n2) {return n1+n2;}
 function sub(n1, n2) {return n1-n2;}
@@ -35,6 +36,7 @@ function operatorCall(symbol) { // TODO make it only work if there is previous v
     val1 = parseFloat(displayText.textContent);
     currentOp = symbol;
     toReplace = true; //get ready for new value 
+    isDecimal = false;
 }
 
 function equalsCall() {
@@ -45,12 +47,14 @@ function equalsCall() {
         val2 = parseFloat(displayText.textContent);
         displayText.textContent = operate(val1, val2, currentOp);
         toReplace = true;
+        isDecimal = false;
     }
 }
 
 function printNum(num) {
-    if (toReplace || displayText.textContent==0) {
+    if (toReplace || displayText.textContent===0) {
         displayText.textContent ='';
+        isDecimal = false;
         toReplace = false;
     }
     displayText.textContent+=num;
@@ -58,6 +62,7 @@ function printNum(num) {
 
 function clearEntry () {
     displayText.textContent = 0;
+    isDecimal = false;
 }
 
 function clearAll () {
@@ -65,6 +70,7 @@ function clearAll () {
     val1 = null;
     val2 = null;
     currentOp = '';
+    isDecimal = false;
 }
 
 // GIVE NUMPAD FUNCTIONALITY
@@ -108,3 +114,16 @@ topRowButtons.item(2).addEventListener("click", function() {
         displayText.textContent = 0;
     }
 });
+
+const bottomRow = document.querySelector(".row4");
+const bottomButtons = bottomRow.querySelectorAll("button");
+bottomButtons.item(1).addEventListener("click", function() {
+    if(!isDecimal) {
+        if (toReplace) {
+            printNum(0.);
+        }
+        displayText.textContent+=".";
+        isDecimal = true;
+    }
+    
+})
