@@ -1,4 +1,5 @@
 const displayText = document.querySelector("p");
+displayText.textContent = 0;
 let currentOp ='';
 let val1;
 let val2;
@@ -56,11 +57,11 @@ function printNum(num) {
 }
 
 function clearEntry () {
-    displayText.textContent = '';
+    displayText.textContent = 0;
 }
 
 function clearAll () {
-    displayText.textContent = ''
+    displayText.textContent = 0;
     val1 = null;
     val2 = null;
     currentOp = '';
@@ -101,7 +102,9 @@ topRowButtons.item(1).addEventListener("click", function() {
     clearAll();
 });
 topRowButtons.item(2).addEventListener("click", function() {
-    if (displayText.textContent.length != 0) {
+    if (displayText.textContent.length > 1) {
         displayText.textContent = displayText.textContent.slice(0, displayText.textContent.length-1);
+    } else {
+        displayText.textContent = 0;
     }
 });
