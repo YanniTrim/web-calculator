@@ -52,7 +52,7 @@ function equalsCall() {
 }
 
 function printNum(num) {
-    if (toReplace || displayText.textContent===0) {
+    if (toReplace || displayText.textContent===0 || displayText.textContent==="0") {
         displayText.textContent ='';
         isDecimal = false;
         toReplace = false;
@@ -101,13 +101,13 @@ eqButton.addEventListener("click", function() {
 //GIVE TOP ROW FUNCTIONALITY
 const topRowDiv = document.querySelector(".top-row");
 const topRowButtons = topRowDiv.querySelectorAll('button');
-topRowButtons.item(0).addEventListener("click", function() {
+topRowButtons.item(0).addEventListener("click", function() {  //CE
     clearEntry();
 });
-topRowButtons.item(1).addEventListener("click", function() {
+topRowButtons.item(1).addEventListener("click", function() {  //C
     clearAll();
 });
-topRowButtons.item(2).addEventListener("click", function() {
+topRowButtons.item(2).addEventListener("click", function() {  //Del
     if (displayText.textContent.length > 1) {
         displayText.textContent = displayText.textContent.slice(0, displayText.textContent.length-1);
     } else {
@@ -116,8 +116,8 @@ topRowButtons.item(2).addEventListener("click", function() {
 });
 
 const bottomRow = document.querySelector(".row4");
-const bottomButtons = bottomRow.querySelectorAll("button");
-bottomButtons.item(1).addEventListener("click", function() {
+const bottomButtons = bottomRow.querySelectorAll("button"); 
+bottomButtons.item(1).addEventListener("click", function() { //decimal button
     if(!isDecimal) {
         if (toReplace) {
             printNum(0.);
@@ -126,4 +126,7 @@ bottomButtons.item(1).addEventListener("click", function() {
         isDecimal = true;
     }
     
+})
+bottomButtons.item(2).addEventListener("click", function() { //+/- button
+    displayText.textContent = operate(parseFloat(displayText.textContent), -1, "*");
 })
