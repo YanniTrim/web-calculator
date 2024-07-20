@@ -5,11 +5,22 @@ let val1;
 let val2;
 let toReplace;
 let isDecimal = false;
+let zeroError = false;
 
 function add(n1, n2) {return n1+n2;}
 function sub(n1, n2) {return n1-n2;}
 function mul(n1, n2) {return n1*n2;}
-function divide(n1, n2) {return n1/n2;}
+function divide(n1, n2) {
+    if (n2==0) {
+        zeroError = true;
+        return "You fool you cannot divide by 0";
+    }
+    return n1/n2;
+}
+
+function sizeFit(displayNum) {
+    return parseInt(displayNum).toFixed(4);
+}
 
 function operate(val1, val2, operator) {
     switch (operator) {
@@ -29,9 +40,14 @@ function operate(val1, val2, operator) {
 }
 
 function operatorCall(symbol) { // TODO make it only work if there is previous value
+    if (zeroError) {
+        clearAll();
+        zeroError = true;
+        return;
+    }
     if (currentOp != '') {
         console.log(currentOp);
-        displayText.textContent = operate(val1, parseFloat(displayText.textContent), currentOp);
+        displayText.textContent = sizeFit(operate(val1, parseFloat(displayText.textContent), currentOp));
     }
     val1 = parseFloat(displayText.textContent);
     currentOp = symbol;
@@ -45,7 +61,7 @@ function equalsCall() {
     }
     else {
         val2 = parseFloat(displayText.textContent);
-        displayText.textContent = operate(val1, val2, currentOp);
+        displayText.textContent = sizeFit(operate(val1, val2, currentOp));
         toReplace = true;
         isDecimal = false;
     }
@@ -56,8 +72,12 @@ function printNum(num) {
         displayText.textContent ='';
         isDecimal = false;
         toReplace = false;
+        zeroError = false;
     }
-    displayText.textContent+=num;
+    if (displayText.textContent.length <16) {
+        displayText.textContent+=num;
+    }
+    
 }
 
 function clearEntry () {
@@ -129,4 +149,20 @@ bottomButtons.item(1).addEventListener("click", function() { //decimal button
 })
 bottomButtons.item(2).addEventListener("click", function() { //+/- button
     displayText.textContent = operate(parseFloat(displayText.textContent), -1, "*");
+})
+
+const buttons = document.querySelectorAll("button");
+buttons.forEach((button) => {
+    button.addEventListener("mouseover", function () {
+        button.style.width = '85px';
+        button.style.height = '85px';
+        button.style.marginTop= 0;
+        button.style.backgroundColor = "rgb(210, 190, 237)";
+    })
+    button.addEventListener("mouseout", function() {
+        button.style.width = '80px';
+        button.style.height = '80px';
+        button.style.marginTop= "5px";
+        button.style.backgroundColor = "rgb(186, 168, 209)";
+    })
 })
