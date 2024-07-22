@@ -19,7 +19,14 @@ function divide(n1, n2) {
 }
 
 function sizeFit(displayNum) {
-    return parseInt(displayNum).toFixed(4);
+    let num= parseFloat(displayNum);
+    let fixedNum= Math.round(num*10000)/10000;
+    if (fixedNum.toString().length>16) {
+        return fixedNum.toExponential(8);
+    } else {
+        return fixedNum;
+    }
+
 }
 
 function operate(val1, val2, operator) {
